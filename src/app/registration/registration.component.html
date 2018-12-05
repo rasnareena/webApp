@@ -1,0 +1,89 @@
+<div  style="margin-top:80px; padding-left:320px" class="container" >
+	<h2>{{appMasterDataService.registrationHeader}}</h2>
+	<div class="col-md-4 col-md-offset-3 "  >
+		<form name="form" (ngSubmit)="regform.form.valid && register(regform)" #regform="ngForm" style="width:500px"  novalidate>
+			<div class="form-group row">
+			    <label for="name" class="col-sm-3 col-form-label">Name: </label>
+			    <div class="col-sm-9">
+			    <input type="text" class="form-control" id="name" name="name"  placeholder="Enter First Name" [(ngModel)]="cust.name" #fname="ngModel"  required />
+			    
+            	<div *ngIf="regform.submitted && !fname.valid" class="alert alert-danger" >  First Name is required  
+            	</div>
+            </div>
+			 </div>
+			 <div class="form-group row">
+			 	<label for="inputPhone" class="col-sm-3 col-form-label">Phone:</label>    
+			     <div class="col-sm-9">
+			      <input 
+			             class="form-control"			              
+			             id="inputPhone" 
+			             name="inputPhone" 
+			             pattern = "^((\\+91-?)|0)?[0-9]{10}$"
+			             placeholder="Enter Phone Number 1234567890"
+			              [(ngModel)]="cust.inputPhone"
+			             #phone = "ngModel"
+			             minLength="10" 
+			             maxLength = "10"
+			               required>
+			       <div *ngIf="regform.submitted && !phone.valid" 
+			       		class="alert alert-danger">  Valid phone number is required
+     				 </div>
+     				</div>
+			 </div>
+			 <!--<div class="form-group">			 	
+			 	<div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" name="datefield" ngModel aria-describedby="img-addon" />
+                <span class="input-group-addon" id="img-addon">
+                    <span class="fa fa-calendar"></span>
+                </span>
+                </div>
+			  	<script type="text/javascript">
+                $(function () {
+                    $('#datetimepicker1').datepicker-days({
+                        icons: {
+                            time: "fa fa-clock-o",
+                            date: "fa fa-calendar",
+                            up: "fa fa-arrow-up",
+                            down: "fa fa-arrow-down",
+                            next: "fa fa-arrow-right",
+                            previous: "fa fa-arrow-left"
+                        },
+                        minDate: "10/15/2013"
+                    });
+                });
+           		 </script>
+			 </div>-->
+			 <div class="form-group row">
+			 	<label for="flatno" class="col-sm-3 col-form-label">Flat No:</label>
+			 	 <div class="col-sm-9">
+			    <input type="text" class="form-control" id="flatno" name="flatno" placeholder="Enter Flat No"
+			    [(ngModel)]="cust.flatno" #fno = "ngModel" required />
+			    <div *ngIf="regform.submitted && !fno.valid" class="alert alert-danger" > Flat no is required</div>
+			</div>
+			 </div>
+
+			 <div class="form-group row">
+			 	<label for="societyname" class="col-sm-3 col-form-label">Society Name:</label>
+			 	<div class="col-sm-9">
+			    <input type="text" class="form-control" id="societyname" name="societyname" placeholder="Enter Society Name" [(ngModel)]="cust.societyname" #sname = "ngModel" required />
+			    <div *ngIf="regform.submitted && !sname.valid"  class="alert alert-danger" > Society name is required  </div>
+			</div>
+			 </div>
+			 <!--<div class="form-group">
+			 	<div class="custom-file">
+				  <input type="file" class="custom-file-input" id="uploadImage">
+				  <label class="custom-file-label" for="uploadImage">Upload Image of Appliances</label>
+				</div>
+				
+			 </div>-->
+			 <button type="submit" [disabled]="!regform.form.valid" class="btn btn-primary">Register</button>
+			 <div class="alert alert-success" role="alert" *ngIf="isSuccess" style="margin:10px;">
+  					{{appMasterDataService.registrationObject.SuccessMessage}}
+					</div>
+					 <div class="alert alert-warning" role="alert" *ngIf="!isSuccess&& errorMessage!='' " style="margin:10px;">
+  					{{errorMessage}}
+					</div>
+		</form>
+
+	</div>
+</div>

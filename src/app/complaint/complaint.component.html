@@ -1,0 +1,72 @@
+<div  style="margin-top:80px; padding-left:320px;  "  class="container" >
+	
+	<div class="col-md-4 "  style="width:1000px; " >
+
+		<h2 >{{appMasterDataService.complaintHeader}}</h2>	 
+			 
+		<form name="form" #compform="ngForm" style="width:400px" (ngSubmit)="compform.form.valid && complaintRegister(compform)"  style="padding-top:40px; width:500px; " novalidate>
+					<div class="alert alert-warning" role="alert" *ngIf="!isRegistered && regData==null" style="margin:10px;">
+  					You are not registered user. Please register yourself at <a routerLink="/registration" class="alert-link">Registration</a> Page.
+					</div>
+					<div class="alert alert-success" role="alert" *ngIf="isComplaintSubmitted " style="margin:10px;">
+  					Your complaint got submitted.
+					</div>
+			<div class="form-group row" >
+			 	<label for="inputPhone" class="col-sm-2 col-form-label">Phone:</label>  
+			 	<div class="col-sm-10">  
+			      		<input 
+			             class="form-control"			              
+			             id="inputPhone" 
+			             name="inputPhone" 
+			             pattern = "[0-9]*"
+			             placeholder="Enter Phone Number 1234567890"
+			              [(ngModel)]="cust.inputPhone"
+			              #phone = "ngModel"
+			             minLength="10" 
+			             maxLength = "10"
+			             (keyup) = "checkExistingCustomer($event)"
+
+			               required>
+			     </div>
+			       
+			 </div>
+
+			 <div class="form-group" *ngIf="isRegistered">
+				<h3>Please update your complaint:</h3>
+			 </div>
+			 <div class="form-group row" *ngIf="isRegistered">
+			 	<label for="name" class="col-sm-2 col-form-label" >Name:</label>
+			 	<div class="col-sm-10">
+			 		<input  class="form-control" [(ngModel)]="cust.name" #fname="ngModel" type="text" readonly class="form-control-plaintext" id="name"  name="name" >
+			 	</div>
+			 </div>
+			  <div class="form-group row" *ngIf="isRegistered">
+			 	<label for="address" class="col-sm-2 col-form-label">Address: </label>
+			 	<div class="col-sm-10">
+			 		<input  class="form-control" [(ngModel)]="cust.address" #faddress="ngModel" type="text" readonly class="form-control-plaintext" id="address"  name="address" >
+			 	</div>
+			 </div>
+			 <div class="form-group row" *ngIf="isRegistered">
+			 	  <label for="complaintdescription" class="col-sm-2 col-form-label">Complaint:</label>
+			 	  <div class="col-sm-10">
+				  		<textarea class="form-control" rows="3" type="input" id="complaintdescription" name="complaintdescription" [(ngModel)]="complaintdescription" #fcomplaintdescription="ngModel"></textarea>	
+				  </div>		
+			 </div>
+			 <div class="form-group row" *ngIf="isRegistered">
+			 	<div class="input-group mb-3">
+			 	 <div class="input-group-prepend"  >
+    				<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+  				</div>
+			 	<div class="custom-file">
+				  <input type="file" class="custom-file-input" value="filename" id="uploadImage"  name="uploadImage" accept="image/*"  (change)="imageUpload($event)"  placeholder="Upload Image..." >
+				  <label class="custom-file-label" for="uploadImage"></label>
+				</div>
+				</div>
+			 </div>
+			 
+			 <button type="submit" [disabled]="!compform.form.valid" *ngIf="isRegistered" class="btn btn-primary">Submit</button>
+			  
+		</form>
+			
+	</div>
+</div>
