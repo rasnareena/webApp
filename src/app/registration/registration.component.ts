@@ -80,10 +80,12 @@ errorMessage:string = "";
         }
         //console.log(this.selectedIndex);
         //console.log(this.cust.societyname);
-        this.selectedProject = this.appMasterDataService.registrationObject.society[this.selectedIndex].project;
-        this.cust.projectname = this.selectedProject[0].name;
-        this.selectedBuilding = this.selectedProject[0].buildingno;
-        this.cust.buildingno = this.selectedProject[0].buildingno[0];
+        if(this.selectedIndex != -1){
+            this.selectedProject = this.appMasterDataService.registrationObject.society[this.selectedIndex].project;
+            this.cust.projectname = this.selectedProject[0].name;
+            this.selectedBuilding = this.selectedProject[0].buildingno;
+            this.cust.buildingno = this.selectedProject[0].buildingno[0];
+        }
   }
 
   /* @onCityChanged - function  called on Registration Page when registration URL contains society names NandedCity and Magarpatta
