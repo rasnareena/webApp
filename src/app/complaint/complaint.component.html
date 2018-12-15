@@ -4,16 +4,16 @@
 
 		<h2 >{{appMasterDataService.complaintHeader}}</h2>	 
 			 
-		<form name="form" #compform="ngForm" style="width:400px" (ngSubmit)="compform.form.valid && complaintRegister(compform)"  style="padding-top:40px; width:500px; " novalidate>
-					<div class="alert alert-warning" role="alert" *ngIf="!isRegistered && regData==null" style="margin:10px;">
-  					You are not registered user. Please register yourself at <a routerLink="/registration" class="alert-link">Registration</a> Page.
+		<form name="form" id="form1" #compform="ngForm" style="width:400px" (ngSubmit)="compform.form.valid && complaintRegister(compform)"  style="padding-top:40px; width:500px; " novalidate>
+					<div class="alert alert-warning" role="alert" *ngIf="notRegistered && regData==null" style="margin:10px;">
+  					You are not registered user. Please register yourself here.
 					</div>
 					<div class="alert alert-success" role="alert" *ngIf="isComplaintSubmitted " style="margin:10px;">
-  					Your complaint got submitted.
+  					Your complaint got submitted. Complaint number is {{cust.comp_id}}
 					</div>
 			<div class="form-group row" >
-			 	<label for="inputPhone" class="col-sm-2 col-form-label">Phone:</label>  
-			 	<div class="col-sm-10">  
+			 	<label for="inputPhone" class="col-sm-3 col-form-label">Phone:</label>  
+			 	<div class="col-sm-9">  
 			      		<input 
 			             class="form-control"			              
 			             id="inputPhone" 
@@ -30,41 +30,62 @@
 			     </div>
 			       
 			 </div>
+			 
+			 <div class="form-group row" *ngIf="notRegistered && !isComplaintSubmitted" >
+			    <label for="name" class="col-sm-3 col-form-label">Name: </label>
+			    <div class="col-sm-9">
+			    <input type="text" class="form-control" id="name" name="name"  placeholder="Enter First Name" [(ngModel)]="cust.name" #fname="ngModel"  required />            	
+            </div>
+			 </div>
+			 <div class="form-group row" *ngIf="notRegistered && !isComplaintSubmitted">
+			 	<label for="flatno" class="col-sm-3 col-form-label">Flat No:</label>
+			 	 <div class="col-sm-9">
+			    <input type="text" class="form-control" id="flatno" name="flatno" placeholder="Enter Flat No"
+			    [(ngModel)]="cust.flatno" #fno = "ngModel" required />		   
+			</div>
+			 </div>
 
-			 <div class="form-group" *ngIf="isRegistered">
+			 <div class="form-group row" *ngIf="notRegistered && !isComplaintSubmitted">
+			 	<label for="societyname" class="col-sm-3 col-form-label">Society Name:</label>
+			 	<div class="col-sm-9">
+			    <input type="text" class="form-control" id="societyname" name="societyname" placeholder="Enter Society Name" 
+			    [(ngModel)]="cust.societyname" #sname = "ngModel" required />			    
+			</div></div>
+
+			 <div class="form-group" *ngIf="isRegistered && !isComplaintSubmitted">
 				<h3>Please update your complaint:</h3>
 			 </div>
-			 <div class="form-group row" *ngIf="isRegistered">
-			 	<label for="name" class="col-sm-2 col-form-label" >Name:</label>
-			 	<div class="col-sm-10">
+			 <div class="form-group row" *ngIf="isRegistered && !isComplaintSubmitted">
+			 	<label for="name" class="col-sm-3 col-form-label" >Name:</label>
+			 	<div class="col-sm-9">
 			 		<input  class="form-control" [(ngModel)]="cust.name" #fname="ngModel" type="text" readonly class="form-control-plaintext" id="name"  name="name" >
 			 	</div>
 			 </div>
-			  <div class="form-group row" *ngIf="isRegistered">
-			 	<label for="address" class="col-sm-2 col-form-label">Address: </label>
-			 	<div class="col-sm-10">
+			  <div class="form-group row" *ngIf="isRegistered && !isComplaintSubmitted">
+			 	<label for="address" class="col-sm-3 col-form-label">Address: </label>
+			 	<div class="col-sm-9">
 			 		<input  class="form-control" [(ngModel)]="cust.address" #faddress="ngModel" type="text" readonly class="form-control-plaintext" id="address"  name="address" >
 			 	</div>
 			 </div>
-			 <div class="form-group row" *ngIf="isRegistered">
-			 	  <label for="complaintdescription" class="col-sm-2 col-form-label">Complaint:</label>
-			 	  <div class="col-sm-10">
-				  		<textarea class="form-control" rows="3" type="input" id="complaintdescription" name="complaintdescription" [(ngModel)]="complaintdescription" #fcomplaintdescription="ngModel"></textarea>	
+			 <div class="form-group row" *ngIf="isRegistered || notRegistered && !isComplaintSubmitted">
+			 	  <label for="complaintdescription" class="col-sm-3 col-form-label">Complaint:</label>
+			 	  <div class="col-sm-9">
+				  		<textarea class="form-control" rows="3" type="input" id="complaintdescription" name="complaintdescription" [(ngModel)]="complaintdescription" #fcomplaintdescription="ngModel" required></textarea>	
 				  </div>		
 			 </div>
-			 <div class="form-group row" *ngIf="isRegistered">
-			 	<div class="input-group mb-3">
-			 	 <div class="input-group-prepend"  >
-    				<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-  				</div>
-			 	<div class="custom-file">
-				  <input type="file" class="custom-file-input" value="filename" id="uploadImage"  name="uploadImage" accept="image/*"  (change)="imageUpload($event)"  placeholder="Upload Image..." >
-				  <label class="custom-file-label" for="uploadImage"></label>
-				</div>
-				</div>
+			 <div class="form-group row" *ngIf="isRegistered || notRegistered && !isComplaintSubmitted">			 	
+		        <!--<div class="input-group" required>-->
+		            <!--span class="input-group-btn" requireds>-->
+		                <!--<span class="btn btn-default btn-file" required>-->
+		                     <input type="file"  value="filename" id="uploadImage"  name="uploadImage" accept="image/*" 
+		                      (change)="imageUpload($event)" required>
+		                <!--</span>-->
+		           <!-- </span> -->
+		            
+		       <!-- </div>			 	-->
 			 </div>
 			 
-			 <button type="submit" [disabled]="!compform.form.valid" *ngIf="isRegistered" class="btn btn-primary">Submit</button>
+			 <button type="submit" [disabled]="!compform.form.valid" *ngIf="isRegistered || notRegistered && !isComplaintSubmitted" class="btn btn-primary">Submit</button>
 			  
 		</form>
 			

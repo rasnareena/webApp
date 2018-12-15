@@ -16,7 +16,8 @@ export class RegistrationService {
 	constructor(private http: HttpClient) {}	
 
 	/* @postCustomerDetail - function  called on submitting customer details to database from Registration Page*/
-	 public postCustomerDetail(cust:Customer): Observable<any> {	 	
+	 public postCustomerDetail(cust:Customer): Observable<any> {
+	 	//console.log('check complaint');	 	
 	 	let url = "http://localhost/api/customer/customerregistration.php";
   		return this.http.post(url, cust, httpOptions);	 
 	 }

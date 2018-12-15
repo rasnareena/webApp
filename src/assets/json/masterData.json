@@ -20,7 +20,36 @@
 			}
 		},
 	"Registration":{	
-		"SuccessMessage":"Registration successfully done."
+		"SuccessMessage":"Registration successfully done.",
+		"society":[
+		{
+			"name":"NandedCity",
+			"project":[
+			{
+				"name":"Jasmine",
+				"buildingno":["B1", "B2", "B3"]
+			},
+			{
+				"name":"Sargam",
+				"buildingno":["B11", "B12" , "B13"]
+			}
+			]
+		},
+		{
+			"name":"Magarpatta",
+			"project":[
+			{
+				"name":"Asawari",
+				"buildingno":["M1", "M2", "M3"]
+			},
+			{
+				"name":"Sanjeevani",
+				"buildingno":["M11", "M12", "M13"]
+			}
+			]
+		}
+
+		]
 		},
 	"Compliant":{
 			"SuccessMessage":"Complaint registered successfully done."

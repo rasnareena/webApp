@@ -18,7 +18,10 @@ export const appRoutes:Routes = [
 		component: ServicesComponent, resolve:{res:MasterDataResolver}
 	},
 	{ 	path:'registration', 
-		component: RegistrationComponent, resolve:{res:MasterDataResolver}
+		component: RegistrationComponent, resolve:{res:MasterDataResolver},
+		children:[
+				{path:'society/:name', component:RegistrationComponent}
+		]
 	}
 	,
 	{ 	path:'complaint', 

@@ -22,6 +22,7 @@ import { ComplaintComponent } from './complaint/complaint.component';
 import { ComplaintService } from './service/complaint.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
